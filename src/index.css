@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-text: var(--text);
+  --color-navbar-background: var(--navbar-background);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-border: var(--border);
+  --color-popover-foreground: var(--border-popover-foreground);
+}
+
+@layer base {
+  :root {
+    --background: rgb(255, 255, 255);
+    --background-error: rgb(255, 217, 217);
+    --foreground: rgb(0, 0, 0);
+    --text: rgb(0, 0, 0);
+    --text-secondary: rgb(102, 102, 102);
+    --text-popover-foreground: rgb(102, 102, 102);
+    --text-hover: rgb(255, 73, 73);
+    --card: rgb(255, 255, 255);
+    --card-hover: rgb(240, 240, 240);
+    --card-foreground: rgb(51, 51, 51);
+    --popover: rgb(255, 255, 255);
+    --popover-foreground: rgb(0, 0, 0);
+    --primary: rgb(255, 73, 73);
+    --primary-dark: rgb(124, 65, 65);
+    --primary-foreground: rgb(249, 249, 249);
+    --secondary: rgb(238, 238, 238);
+    --secondary-foreground: rgb(0, 0, 0);
+    --muted: rgb(245, 245, 245);
+    --muted-foreground: rgb(102, 102, 102);
+    --accent: rgb(238, 238, 238);
+    --accent-foreground: var(--primary);
+    --destructive: rgb(222, 75, 75);
+    --destructive-foreground: rgb(249, 249, 249);
+    --radius: 0.5rem;
+    --border: rgb(204, 204, 204);
+    --border-error: rgb(255, 17, 21);
+    --input: rgb(238, 238, 238);
+    --ring: rgba(214,216,214,.5);
+    --chart-1: rgb(25,118,210);
+    --chart-2: rgb(51,161,139);
+    --chart-3: rgb(234,159,77);
+    --chart-4: rgb(158,90,199);
+    --chart-5: rgb(223,67,109);
+    --navbar-background: rgba(255 ,255 ,255 , .9); /* Slightly transparent */
+ 
+    
+     
+  }
+  .dark {
+    --background: rgb(23, 23, 23);
+    --background-error: rgb(138, 24, 27);
+    --foreground: rgb(249, 249, 249);
+    --text: rgb(249, 249, 249);
+    --text-secondary: rgb(159, 165, 170);
+    --text-popover-foreground: rgb(159, 165, 170);
+    --text-hover: rgb(255, 73, 73);
+    --card: rgb(27, 27, 27);
+    --card-hover: rgb(14, 14, 14);
+    --card-foreground: rgb(199, 199, 199);
+    --popover: rgb(27, 27, 27);
+    --popover-foreground: rgb(249, 249, 249);
+    --primary: rgb(255, 73, 73);
+    --primary-dark: rgb(124, 65, 65);
+    --primary-foreground: rgb(249, 249, 249);
+    --secondary: rgb(38, 38, 41);
+    --secondary-foreground: rgb(249, 249, 249);
+    --muted: rgb(46, 46, 46);
+    --muted-foreground: rgb(159, 165, 170);
+    --accent: rgb(38, 38, 41);
+    --accent-foreground: var(--primary);
+    --destructive: rgb(222, 75, 75);
+    --destructive-foreground: rgb(249, 249, 249);
+    --radius: 0.5rem;
+    --border: rgb(65, 65, 65);
+    --border-error: rgb(255, 17, 21);
+    --input: rgb(38, 38, 41);
+    --ring: rgb(214, 216, 214);
+    --chart-1: rgb(25, 118, 210);
+    --chart-2: rgb(51, 161, 139);
+    --chart-3: rgb(234, 159, 77);
+    --chart-4: rgb(158, 90, 199);
+    --chart-5: rgb(223, 67, 109);
+    --navbar-background: rgb(17, 17, 17);
+    --sidebar-background: rgb(17, 17, 17);
+    --sidebar-foreground: rgb(244, 244, 244);
+    --sidebar-primary: rgb(87, 90, 216);
+    --sidebar-primary-foreground: rgb(255, 255, 255);
+    --sidebar-accent: rgb(38, 38, 41);
+    --sidebar-accent-foreground: rgb(244, 244, 244);
+    --sidebar-border: rgb(38, 38, 41);
+    --sidebar-ring: rgb(37, 178, 255);
+  }
+}

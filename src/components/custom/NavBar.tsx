@@ -15,41 +15,42 @@ import { Link } from 'react-router-dom';
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
+    title: "JSON",
+    href: "/formate/json",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "Formats JSON data to be more readable with proper indentation, syntax highlighting, and error detection. Supports minifying or prettifying and validating against JSON standards.",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    title: "XML",
+    href: "/formate/xml",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Formats and beautifies XML with indentation and tag alignment. Helps detect unclosed tags and supports collapsing/expanding node trees for easier navigation.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "YAML",
+    href: "/formate/yaml",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Cleans and organizes YAML data with consistent spacing and indentation. Includes validation to detect structural or formatting issues.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "CSV",
+    href: "/formate/csv",
+    description:
+      "Formats CSV data into aligned columns for easier reading. Converts data to and from other formats like JSON or Excel-compatible tables.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "HTML",
+    href: "/formate/html",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "Beautifies and structures HTML with proper indentation. Helps remove unnecessary whitespace and detects unclosed tags or invalid nesting.",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "SQL",
+    href: "/formate/sql",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Formats SQL queries with proper indentation and keyword highlighting for improved readability. Supports formatting for different SQL dialects (MySQL, PostgreSQL, etc.).",
   },
-]
+];
 
 
 function NavBar() {
@@ -93,7 +94,7 @@ function NavBar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Formate file</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid text-text w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map((component) => (

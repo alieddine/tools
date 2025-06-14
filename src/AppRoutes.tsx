@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Json from "./pages/Json";
+import Json from "./pages/json/Json";
 import MainRoute from "./pages/MainRoute";
 import Home from "./pages/Home";
 

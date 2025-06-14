@@ -7,12 +7,18 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-text: var(--text);
+  --color-danger: var(--danger);
   --color-navbar-background: var(--navbar-background);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-popover: var(--popover);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-card-foreground: var(--card-foreground);
   --color-border: var(--border);
+  --color-border-two: var(--border-two);
   --color-popover-foreground: var(--border-popover-foreground);
+
 }
 
 @layer base {
@@ -23,14 +29,15 @@
     --text: rgb(0, 0, 0);
     --text-secondary: rgb(102, 102, 102);
     --text-popover-foreground: rgb(102, 102, 102);
-    --text-hover: rgb(255, 73, 73);
-    --card: rgb(255, 255, 255);
+    --danger: rgb(255, 17, 21);
+    --text-hover: rgb(73, 73, 255);
+    --card: rgb(224, 219, 219);
     --card-hover: rgb(240, 240, 240);
     --card-foreground: rgb(51, 51, 51);
     --popover: rgb(255, 255, 255);
     --popover-foreground: rgb(0, 0, 0);
-    --primary: rgb(255, 73, 73);
-    --primary-dark: rgb(124, 65, 65);
+    --primary: rgb(73, 73, 255);
+    --primary-dark: rgb(13, 71, 161);
     --primary-foreground: rgb(249, 249, 249);
     --secondary: rgb(238, 238, 238);
     --secondary-foreground: rgb(0, 0, 0);
@@ -42,6 +49,7 @@
     --destructive-foreground: rgb(249, 249, 249);
     --radius: 0.5rem;
     --border: rgb(204, 204, 204);
+    --border-two: rgb(134, 132, 132);
     --border-error: rgb(255, 17, 21);
     --input: rgb(238, 238, 238);
     --ring: rgba(214,216,214,.5);
@@ -62,14 +70,15 @@
     --text: rgb(249, 249, 249);
     --text-secondary: rgb(159, 165, 170);
     --text-popover-foreground: rgb(159, 165, 170);
-    --text-hover: rgb(255, 73, 73);
+    --danger: rgb(255, 17, 21);
+    --text-hover: rgb(73, 73, 255);
     --card: rgb(27, 27, 27);
     --card-hover: rgb(14, 14, 14);
     --card-foreground: rgb(199, 199, 199);
     --popover: rgb(27, 27, 27);
     --popover-foreground: rgb(249, 249, 249);
-    --primary: rgb(255, 73, 73);
-    --primary-dark: rgb(124, 65, 65);
+    --primary: rgb(73, 73, 255);
+    --primary-dark: rgb(13, 71, 161);
     --primary-foreground: rgb(249, 249, 249);
     --secondary: rgb(38, 38, 41);
     --secondary-foreground: rgb(249, 249, 249);
@@ -81,6 +90,7 @@
     --destructive-foreground: rgb(249, 249, 249);
     --radius: 0.5rem;
     --border: rgb(65, 65, 65);
+    --border-two: rgb(82, 82, 82);
     --border-error: rgb(255, 17, 21);
     --input: rgb(38, 38, 41);
     --ring: rgb(214, 216, 214);

@@ -1,5 +1,6 @@
 import './App.css'
 import AppRoutes from './AppRoutes';
+import { ThemeProvider } from './components/ui/theme-provider';
 
 function App() {
 
@@ -14,7 +15,10 @@ function App() {
   }
 
   return (
-    <AppRoutes />
+    <ThemeProvider>
+      <AppRoutes />
+    </ThemeProvider>
+
   )
 }
 

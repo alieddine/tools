@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import './App.css'
 import AppRoutes from './AppRoutes';
 import { ThemeProvider } from './components/ui/theme-provider';
@@ -16,7 +17,9 @@ function App() {
 
   return (
     <ThemeProvider>
+      <StrictMode>
       <AppRoutes />
+      </StrictMode>
     </ThemeProvider>
 
   )

@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/navigation-menu"
 
 import ThemeToggle from './ThemeToggle';
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
@@ -56,7 +55,7 @@ const components: { title: string; href: string; description: string }[] = [
 function NavBar() {
 
   return (
-    <div className="bg-navbar-background w-full h-[6dvh] flex items-center justify-between px-4 shadow-md ">
+    <div className="bg-navbar-background z-50 w-full h-[6dvh] flex items-center justify-between px-4 shadow-md ">
       <div className="text-text text-lg font-bold">
         Tools
       </div>
@@ -65,17 +64,17 @@ function NavBar() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Home</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid text-text gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
+            <ul className="grid z-50 text-text gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <li className="row-span-3 z-50">
                 <NavigationMenuLink asChild>
                   <a
-                    className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
+                    className="from-muted/50 z-50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
                     href="/"
                   >
-                    <div className="mt-4 mb-2 text-lg font-medium">
+                    <div className="mt-4 mb-2 z-50 text-lg font-medium">
                       shadcn/ui
                     </div>
-                    <p className="text-muted-foreground text-sm leading-tight">
+                    <p className="text-muted-foreground z-50 text-sm leading-tight">
                       Beautifully designed components built with Tailwind CSS.
                     </p>
                   </a>
@@ -114,84 +113,26 @@ function NavBar() {
             <Link to="/docs">Docs</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
+       
         <NavigationMenuItem>
-          <NavigationMenuTrigger>List</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid text-text w-[300px] gap-4">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link to="#">
-                    <div className="font-medium">Components</div>
-                    <div className="text-muted-foreground">
-                      Browse all components in the library.
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link to="#">
-                    <div className="font-medium">Documentation</div>
-                    <div className="text-muted-foreground">
-                      Learn how to use the library.
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link to="#">
-                    <div className="font-medium">Blog</div>
-                    <div className="text-muted-foreground">
-                      Read our latest blog posts.
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Simple</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Colors</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid text-text w-[200px] gap-4">
               <li>
                 <NavigationMenuLink asChild>
-                  <Link to="#">Components</Link>
+                  <Link to="/colors/picker ">Color picker</Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link to="#">Documentation</Link>
+                  <Link to="#">Color converter</Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link to="#">Blocks</Link>
+                  <Link to="#">Color palette generator</Link>
                 </NavigationMenuLink>
               </li>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid text-text w-[200px] gap-4">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link to="#" className="flex-row items-center gap-2">
-                    <CircleHelpIcon />
-                    Backlog
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link to="#" className="flex-row items-center gap-2">
-                    <CircleIcon />
-                    To Do
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link to="#" className="flex-row items-center gap-2">
-                    <CircleCheckIcon />
-                    Done
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+         
       </NavigationMenuList>
     </NavigationMenu>
 

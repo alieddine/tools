@@ -1,0 +1,101 @@
+
+.ace_search input {
+ 
+    border-radius: 6px !important;
+}
+.ace_button {
+    color: #2c2c2c !important;
+    background-color: #ffffff !important;
+    padding: 1px 6px !important;
+    border-radius: 6px !important;
+}
+.ace_search_options{ 
+    margin: 10px 2px !important;
+    align-items: center !important;
+}
+.ace_searchbtn_close {
+    background: none !important;        
+    background-color: #fd0a0a !important; 
+    color: #fff !important;
+    border: none !important;
+    width: 29px;
+    height: 29px;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    top: 6px !important;
+}
+.ace_nomatch{
+    outline: none !important;
+}
+.ace_search_form{
+    margin-inline-end: 30px !important;
+}
+.ace_searchbtn_close::before {
+    content: '×'; /* Show text X instead of background image */
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+
+.ace_searchbtn_close:hover {
+    background-color: #b10505 !important;
+    transition: background-color 0.3s ease-in-out !important;
+}
+.ace_searchbtn{
+ 
+    border: none !important;
+    border-radius: 6px !important;
+    margin: 0 3px !important;
+}
+.dark{
+    .ace_search {
+        background-color: #1b1b1b !important;
+        color: #fff !important;
+        border: 1px solid #3f3f3f !important;
+
+    }
+
+    .ace_search input {
+        background-color: #444 !important;
+        color: #fff !important;
+        border: none !important;
+        border-radius: 6px !important;
+    }
+
+    .ace_search button {
+        background-color: #555 !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+    .ace_button {
+        color: #fff !important;
+        background-color: #3f3f3f !important;
+        padding: 1px 6px !important;
+        border-radius: 6px !important;
+    }
+  
+    
+    
+    .ace_searchbtn{
+        background-color: #3f3f3f !important;
+        color: #fff !important;
+        border: none !important;
+        border-radius: 6px !important;
+        margin: 0 3px !important;
+ 
+    }
+}
+ 
+.ace_error-highlight {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.521);
+  z-index: 20;
+} 

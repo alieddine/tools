@@ -6,14 +6,14 @@ function MainRoute() {
         window.location.pathname = '/home';
     }
     return (
-        <div className=" w-full h-dvh bg-background space-y-1">
+        <div className="custom-scrollbar w-full h-dvh bg-background space-y-1">
             <NavBar />
 
-            <div className="flex  h-[93dvh]  flex-col justify-between">
+            <div className="flex  h-[93dvh]   flex-col justify-between">
                 
                 <Outlet />
-                <footer className="bg-navbar-background static bottom-0 w-full flex flex-col justify-between  text-text text-center my-2">
-                <div className='m-auto w-[90%] bg-border h-[0.5px] mb-2' />
+                <footer className="bg-navbar-background static py-2 gap-2 bottom-0 w-full flex flex-col justify-between  text-text text-center ">
+                <div className='m-auto w-[90%] bg-border h-[0.5px] ' />
                 <p>&copy; {new Date().getFullYear()} Tools. All rights reserved.</p>
             </footer>
             </div>

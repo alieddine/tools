@@ -5,9 +5,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
   --color-danger: var(--danger);
+  --color-success: var(--success);
   --color-navbar-background: var(--navbar-background);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -30,6 +34,7 @@
     --text-secondary: rgb(102, 102, 102);
     --text-popover-foreground: rgb(102, 102, 102);
     --danger: rgb(255, 17, 21);
+    --success: rgb(0, 153, 0);
     --text-hover: rgb(73, 73, 255);
     --card: rgb(224, 219, 219);
     --card-hover: rgb(240, 240, 240);
@@ -37,7 +42,7 @@
     --popover: rgb(255, 255, 255);
     --popover-foreground: rgb(0, 0, 0);
     --primary: rgb(73, 73, 255);
-    --primary-dark: rgb(13, 71, 161);
+    --primary-dark: rgb(51, 133, 255);
     --primary-foreground: rgb(249, 249, 249);
     --secondary: rgb(238, 238, 238);
     --secondary-foreground: rgb(0, 0, 0);
@@ -58,7 +63,7 @@
     --chart-3: rgb(234,159,77);
     --chart-4: rgb(158,90,199);
     --chart-5: rgb(223,67,109);
-    --navbar-background: rgba(255 ,255 ,255 , .9); /* Slightly transparent */
+    --navbar-background: rgba(241, 241, 241, 0.9); /* Slightly transparent */
  
     
      
@@ -71,6 +76,7 @@
     --text-secondary: rgb(159, 165, 170);
     --text-popover-foreground: rgb(159, 165, 170);
     --danger: rgb(255, 17, 21);
+    --success: rgb(88, 253, 88);
     --text-hover: rgb(73, 73, 255);
     --card: rgb(27, 27, 27);
     --card-hover: rgb(14, 14, 14);
@@ -109,4 +115,20 @@
     --sidebar-border: rgb(38, 38, 41);
     --sidebar-ring: rgb(37, 178, 255);
   }
+}
+
+::-webkit-scrollbar {
+  width: 8px; 
+  height: 8px;
+}
+ ::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-dark); 
+  border-radius: 1px; 
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--secondary);  
 }

@@ -4,6 +4,7 @@ import MainRoute from "./pages/MainRoute";
 import Home from "./pages/Home";
 import NotFound from "./pages/notFound";
 import ColorPicker from "./pages/colors/colorPicker";
+import ConvertCase from "./pages/text/convertCase";
 
 
 const AppRoutes = () => {
@@ -16,6 +17,9 @@ const AppRoutes = () => {
                 </Route>
                 <Route path="/colors">
                     <Route path="picker" element={<ColorPicker />} />
+                </Route>
+                <Route path="/text">
+                    <Route path="convert" element={<ConvertCase />} />
                 </Route>
             <Route path="*" element={<NotFound />} />
             </Route>

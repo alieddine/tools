@@ -19,6 +19,7 @@
     "ace-builds": "^1.42.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "color-thief-browser": "^2.0.2",
     "dexie": "^4.0.11",
     "json-stringify-pretty-compact": "^4.0.0",
     "lucide-react": "^0.513.0",

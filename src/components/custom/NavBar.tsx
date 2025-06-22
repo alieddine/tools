@@ -10,7 +10,7 @@ import {
 
 import ThemeToggle from './ThemeToggle';
 import { Link } from 'react-router-dom';
-
+import "../../index.css";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -55,7 +55,7 @@ const components: { title: string; href: string; description: string }[] = [
 function NavBar() {
 
   return (
-    <div className="bg-navbar-background z-50 w-full h-[6dvh] flex items-center justify-between px-4 shadow-md ">
+    <div className="bg-navbar-background z-50 w-full h-[6dvh] mb-2 flex items-center justify-between px-4 shadow-custom ">
       <div className="text-text text-lg font-bold">
         Tools
       </div>

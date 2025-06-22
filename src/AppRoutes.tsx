@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/notFound";
 import ColorPicker from "./pages/colors/colorPicker";
 import ConvertCase from "./pages/text/convertCase";
+import Ocr from "./pages/text/ocr";
 
 
 const AppRoutes = () => {
@@ -20,6 +21,7 @@ const AppRoutes = () => {
                 </Route>
                 <Route path="/text">
                     <Route path="convert" element={<ConvertCase />} />
+                    <Route path="ocr" element={<Ocr />} />
                 </Route>
             <Route path="*" element={<NotFound />} />
             </Route>

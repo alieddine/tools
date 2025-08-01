@@ -1,15 +1,15 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
-import JsonPanel from "./components/jsonPanel"
-import ControleMenu from "./components/controleMenu"
+import ControleMenu from "../json/components/controleMenu"
 import { useEffect, useRef, useState } from "react"
 import type { ImperativePanelHandle } from "react-resizable-panels"
-import { EditorThemeProvider } from "@/context/EditorThemeContext"
+import XmlPanel from "./components/xmlPanel"
+
 import { ThemeSelector } from "@/components/custom/ThemeSelector"
+import { EditorThemeProvider } from "@/context/EditorThemeContext"
 
 
 
-
-function Json() {
+function Xml() {
     const leftPanelRef = useRef<ImperativePanelHandle>(null)
     const rightPanelRef = useRef<ImperativePanelHandle>(null)
     // false means left panel is closed and right panel is open
@@ -48,27 +48,28 @@ function Json() {
         }
     }, [leftPanelSize, rightPanelSize]);
     return (
-        <EditorThemeProvider page="json">
+        <EditorThemeProvider page="xml">
 
             <div className="h-screen px-3 py-3 bg-background">
                 <div className="flex justify-between">
-                    <h1 className="text-2xl text-text font-bold mb-4">JSON Data formatter</h1>
+                    <h1 className="text-2xl text-text font-bold mb-4">XML Data formatter</h1>
                     <div className="flex items-center text-text gap-2">
                         Select Editor Theme:
                         <ThemeSelector />
                     </div>
                 </div>
 
+
                 <ResizablePanelGroup direction="horizontal" className="max-h-[90%] w-full rounded-md border-2 border-border md:min-w-[450px]">
                     <ResizablePanel className={` transition-all  ${isCollapsed === false ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'} transform `} ref={leftPanelRef} onResize={(size) => setLeftPanelSize(size)} defaultSize={100}>
-                        <JsonPanel />
+                        <XmlPanel />
                     </ResizablePanel>
                     <ResizableHandle className="h-full" />
 
                     <ControleMenu isCollapsed={isCollapsed} toggleToLeft={toggleToLeft} toggleToRight={toggleToRight} />
 
                     <ResizablePanel className={` transition-all  ${isCollapsed === true ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'} transform `} ref={rightPanelRef} onResize={(size) => setRightPanelSize(size)} defaultSize={0}>
-                        <JsonPanel />
+                        <XmlPanel />
                     </ResizablePanel>
                 </ResizablePanelGroup>
 
@@ -78,4 +79,4 @@ function Json() {
     )
 }
 
-export default Json
+export default Xml

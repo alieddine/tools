@@ -57,7 +57,9 @@ function NavBar() {
   return (
     <div className="bg-navbar-background z-50 w-full h-[6dvh] mb-2 flex items-center justify-between px-4 shadow-custom ">
       <div className="text-text text-lg font-bold">
-        Tools
+        <Link to="/home" >
+          Tools
+        </Link>
       </div>
       <NavigationMenu viewport={false}>
         <NavigationMenuList>

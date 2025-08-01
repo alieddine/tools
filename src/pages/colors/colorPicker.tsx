@@ -140,7 +140,6 @@ export default function ColorPicker() {
     }, []);
     
 
-    console.log("palette", palette);
     const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
         if (!canvas) return;

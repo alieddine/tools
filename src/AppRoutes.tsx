@@ -6,6 +6,7 @@ import NotFound from "./pages/notFound";
 import ColorPicker from "./pages/colors/colorPicker";
 import ConvertCase from "./pages/text/convertCase";
 import Ocr from "./pages/text/ocr";
+import Xml from "./pages/xml/Xml";
 
 
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/formate">
                     <Route path="json" element={<Json />} />
+                    <Route path="xml" element={<Xml />} />
                 </Route>
                 <Route path="/colors">
                     <Route path="picker" element={<ColorPicker />} />

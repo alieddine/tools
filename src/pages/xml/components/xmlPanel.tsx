@@ -1,6 +1,5 @@
 import TextEditor from '@/components/custom/textEditor';
 import { useEffect, useState } from 'react';
-import { GetJsonTheme } from '../../../helpers/theme.ts';
 import { format } from '../../../helpers/formater.ts';
 import {
   Tooltip,
@@ -25,9 +24,11 @@ import {
 import { deleteFile, getFile, listFilesByType, saveNewFile, updateFile } from '../../../helpers/manage-db.ts';
 import { Button } from '@/components/ui/button.tsx';
 import type { FileEntry } from '@/helpers/db.ts';
-import { type Ace } from 'ace-builds';
+import type { Ace } from 'ace-builds';
 import type { Marker } from '../../../helpers/formater';
-import { CarbonExecutableProgram, MaterialSymbolsAddNotes, MdiCodeJson, MdiContentCopy, MdiContentSave, MdiDeleteForever, MdiMathLog } from '@/components/custom/svgs.tsx';
+import { CarbonExecutableProgram, MaterialSymbolsAddNotes, MdiXml, MdiContentCopy, MdiContentSave, MdiDeleteForever, MdiMathLog } from '@/components/custom/svgs.tsx';
+
+import { parse, j2xParser } from 'fast-xml-parser';
 import { useEditorThemeContext } from '@/context/EditorThemeContext.tsx';
 
 type FileListItem = {
@@ -36,17 +37,19 @@ type FileListItem = {
 };
 
 
-function JsonPanel() {
+function XmlPanel() {
 
   const [selectedFile, setSelectedFile] = useState<FileEntry>({
     name: '',
-    type: 'json',
+    type: 'XML',
     content: '',
     createdAt: new Date().toISOString(),
   });
+  const { editorTheme } = useEditorThemeContext();
+  
   const [annotations, setAnnotations] = useState<Ace.Annotation[]>([]);
   const [markers, setMarkers] = useState<Marker[]>([]);
-  const { editorTheme } = useEditorThemeContext();
+  
   return (
     <div className="flex flex-col h-[800px] text-text  scale-x-100 min-w-[400px] items-start justify-start">
       <ControlMenu selectedFile={selectedFile} setSelectedFile={setSelectedFile} setAnnotations={setAnnotations} setMarkers={setMarkers} />
@@ -54,8 +57,8 @@ function JsonPanel() {
         <div className=" bg-card w-full h-full text-text">
           <TextEditor
             value={selectedFile?.content ?? ""}
-            language="json"
-            theme={editorTheme || GetJsonTheme()}
+            language="xml"
+            theme={editorTheme ?? undefined}
             onChange={(val) => setSelectedFile({ ...selectedFile, content: val })}
             annotations={annotations}
             markers={markers}
@@ -84,19 +87,43 @@ const ControlMenu = ({
   const [openFileNamePopover, setOpenFileNamePopover] = useState<boolean>(false);
   const [updateFileList, setUpdateFileList] = useState<boolean>(false);
 
-  const formatJson = () => {
+  const logsFormatXML = () => {
     if (!selectedFile) {
       console.error('No file selected for formatting');
       return;
     }
-    const formattedJson = format({ code: selectedFile.content, type: 'json' });
-    if (formattedJson.success && formattedJson.formatted) {
-      setSelectedFile({ ...selectedFile, content: formattedJson.formatted });
+  
+    let cleanXML = selectedFile.content.trim();
+  
+    const startIndex = cleanXML.indexOf('<');
+    const endIndex = cleanXML.lastIndexOf('>');
+    cleanXML = cleanXML.substring(startIndex, endIndex + 1);
+  
+    const formattedXML = format({ code: cleanXML, type: 'xml' });
+    if (formattedXML.success && formattedXML.formatted) {
+      setSelectedFile({ ...selectedFile, content: formattedXML.formatted });
       setAnnotations([]);
       setMarkers([]);
-    } else if (!formattedJson.success) {
-      setAnnotations(formattedJson.annotations || []);
-      setMarkers(formattedJson.markers || []);
+    } else if (!formattedXML.success) {
+      setAnnotations(formattedXML.annotations || []);
+      setMarkers(formattedXML.markers || []);
+    }
+  };
+  
+
+  const formatXML = () => {
+    if (!selectedFile) {
+      console.error('No file selected for formatting');
+      return;
+    }
+    const formattedXML = format({ code: selectedFile.content, type: 'xml' });
+    if (formattedXML.success && formattedXML.formatted) {
+      setSelectedFile({ ...selectedFile, content: formattedXML.formatted });
+      setAnnotations([]);
+      setMarkers([]);
+    } else if (!formattedXML.success) {
+      setAnnotations(formattedXML.annotations || []);
+      setMarkers(formattedXML.markers || []);
     }
   };
 
@@ -123,25 +150,27 @@ const ControlMenu = ({
     navigator.clipboard.writeText(selectedFile.content)
       .then(() => { })
       .catch(err => {
-        console.error('Failed to copy JSON: ', err);
+        console.error('Failed to copy XML: ', err);
       });
   };
 
-  const flatJson = () => {
+  const flatXML = () => {
     if (!selectedFile) {
       console.error('No file selected for flattening');
       return;
     }
     try {
-      const parsedJson = JSON.parse(selectedFile.content);
-      const flattenedJson = JSON.stringify(parsedJson);
-      setSelectedFile({ ...selectedFile, content: flattenedJson });
+
+      const parsedXML = parse(selectedFile.content);
+      const parser = new j2xParser({});
+      const flattenedXML = parser.parse(parsedXML);
+      setSelectedFile({ ...selectedFile, content: flattenedXML });
     } catch (error) {
-      console.error('Error flattening JSON:', error);
+      console.error('Error flattening XML:', error);
     }
   };
 
-  const saveJsonFile = async () => {
+  const saveXMLFile = async () => {
     if (fileName.trim() === '') {
       alert('Please enter a file name');
       return;
@@ -157,7 +186,7 @@ const ControlMenu = ({
         console.error('Error updating file:', result.error);
       }
     } else {
-      const result = await saveNewFile(fileName, 'json', selectedFile.content);
+      const result = await saveNewFile(fileName, 'XML', selectedFile.content);
       if (result.success && result.file) {
         setSelectedFile(result.file);
         setUpdateFileList(!updateFileList);
@@ -183,7 +212,7 @@ const ControlMenu = ({
   const initializeNewFile = () => {
     setSelectedFile({
       name: '',
-      type: 'json',
+      type: 'XML',
       content: '',
       createdAt: new Date().toISOString(),
     });
@@ -194,7 +223,7 @@ const ControlMenu = ({
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const files = await listFilesByType("json");
+        const files = await listFilesByType("XML");
         if (files.success && files.files) {
           setFileList(files.files);
         } else {
@@ -206,49 +235,6 @@ const ControlMenu = ({
     };
     fetchFiles();
   }, [updateFileList]);
-
-  const logsFormatJson = () => {
-    if (!selectedFile) {
-      console.error('No file selected for formatting');
-      return;
-    }
-
-    const content = selectedFile.content;
-    const firstCurly = content.indexOf('{');
-    const firstSquare = content.indexOf('[');
-    const firstIndex =
-      firstCurly === -1
-        ? firstSquare
-        : firstSquare === -1
-        ? firstCurly
-        : Math.min(firstCurly, firstSquare);
-
-    const lastCurly = content.lastIndexOf('}');
-    const lastSquare = content.lastIndexOf(']');
-    const lastIndex =
-      lastCurly === -1
-        ? lastSquare
-        : lastSquare === -1
-        ? lastCurly
-        : Math.max(lastCurly, lastSquare);
-
-    if (firstIndex === -1 || lastIndex === -1 || firstIndex >= lastIndex) {
-      console.error('Invalid JSON structure');
-      return;
-    }
-
-    const trimmedContent = content.slice(firstIndex, lastIndex + 1);
-
-    try {
-      const parsedJson = JSON.parse(trimmedContent);
-      const formattedJson = JSON.stringify(parsedJson, null, 2);
-      setSelectedFile({ ...selectedFile, content: formattedJson });
-      setAnnotations([]);
-      setMarkers([]);
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-    }
-  };
 
   return <div className="flex  w-full h-10 items-center pe-2 border-border border-b">
     <div className="flex items-center">
@@ -270,30 +256,31 @@ const ControlMenu = ({
     <div className="flex flex-row-reverse items-center  gap-x-2 w-full justify-start  ">
 
 
-      <TooltipCustom content={selectedFile.id ? "Delete file" : "Delete JSON"}>
+      <TooltipCustom content={selectedFile.id ? "Delete file" : "Delete XML"}>
         <MdiDeleteForever className="size-7 cursor-pointer fill-danger hover:scale-110 ease-in-out duration-200" onClick={deleteText} />
       </TooltipCustom>
-      <TooltipCustom content="Remove logs and Format JSON">
-        <MdiMathLog className='size-7 cursor-pointer fill-success hover:scale-110 ease-in-out duration-200 ' onClick={logsFormatJson} />
+
+      <TooltipCustom content="Remove logs and Formate XML">
+        <MdiMathLog className='size-7 cursor-pointer fill-success hover:scale-110 ease-in-out duration-200 ' onClick={logsFormatXML} />
       </TooltipCustom>
 
-      <TooltipCustom content="Flatten JSON">
-        <CarbonExecutableProgram className='size-7 cursor-pointer fill-success hover:scale-110 ease-in-out duration-200 ' onClick={formatJson} />
+      <TooltipCustom content="Formate XML">
+        <CarbonExecutableProgram className='size-7 cursor-pointer fill-success hover:scale-110 ease-in-out duration-200 ' onClick={formatXML} />
       </TooltipCustom>
-      <TooltipCustom content="Copy JSON to clipboard">
+      <TooltipCustom content="Copy XML to clipboard">
         <MdiContentCopy className="size-6 cursor-pointer fill-text hover:scale-110 ease-in-out duration-200" onClick={copyToClipboard} />
       </TooltipCustom>
 
       <Popover open={openFileNamePopover} onOpenChange={setOpenFileNamePopover}>
         <PopoverTrigger className="flex ">
-          <TooltipCustom content="Save JSON file">
+          <TooltipCustom content="Save XML file">
             <MdiContentSave className="size-7 cursor-pointer fill-text hover:scale-110 ease-in-out duration-200" />
           </TooltipCustom>
         </PopoverTrigger>
         <PopoverContent className="text-text border-border w-80">
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-semibold">Save JSON</h3>
-            <p className="text-sm text-muted-foreground">Enter a name for your JSON file:</p>
+            <h3 className="text-lg font-semibold">Save XML</h3>
+            <p className="text-sm text-muted-foreground">Enter a name for your XML file:</p>
             <input
               type="text"
               placeholder="File name"
@@ -302,20 +289,20 @@ const ControlMenu = ({
               onChange={(e) => setFileName(e.target.value)}
               onKeyDown={async (e) => {
                 if (e.key === 'Enter') {
-                  saveJsonFile();
+                  saveXMLFile();
                 }
               }}
             />
-            <Button onClick={saveJsonFile}>save</Button>
+            <Button onClick={saveXMLFile}>save</Button>
           </div>
         </PopoverContent>
 
       </Popover>
-      <TooltipCustom content="Add new JSON file">
+      <TooltipCustom content="Add new XML file">
         <MaterialSymbolsAddNotes className="size-6 cursor-pointer fill-text hover:scale-110 ease-in-out duration-200" onClick={initializeNewFile} />
       </TooltipCustom>
-      <TooltipCustom content="Add new JSON file">
-        <MdiCodeJson className="size-6 cursor-pointer fill-text hover:scale-110 ease-in-out duration-200" onClick={flatJson} />
+      <TooltipCustom content="Flatten XML">
+        <MdiXml className="size-6 cursor-pointer fill-text hover:scale-110 ease-in-out duration-200" onClick={flatXML} />
       </TooltipCustom>
     </div>
   </div>
@@ -333,4 +320,4 @@ const TooltipCustom = ({ children, content }: { children: React.ReactNode; conte
     </Tooltip>
   );
 }
-export default JsonPanel;
+export default XmlPanel;

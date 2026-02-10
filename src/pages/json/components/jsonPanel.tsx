@@ -1,7 +1,7 @@
 import TextEditor from '@/components/custom/textEditor';
 import { useEffect, useState } from 'react';
 import { GetJsonTheme } from '../../../helpers/theme.ts';
-import { format } from '../../../helpers/formater.ts';
+import { format } from '../../../helpers/formatter.ts';
 import {
   Tooltip,
   TooltipContent,
@@ -26,7 +26,7 @@ import { deleteFile, getFile, listFilesByType, saveNewFile, updateFile } from '.
 import { Button } from '@/components/ui/button.tsx';
 import type { FileEntry } from '@/helpers/db.ts';
 import { type Ace } from 'ace-builds';
-import type { Marker } from '../../../helpers/formater';
+import type { Marker } from '../../../helpers/formatter';
 import { CarbonExecutableProgram, MaterialSymbolsAddNotes, MdiCodeJson, MdiContentCopy, MdiContentSave, MdiDeleteForever, MdiMathLog } from '@/components/custom/svgs.tsx';
 import { useEditorThemeContext } from '@/context/EditorThemeContext.tsx';
 
@@ -213,20 +213,20 @@ const ControlMenu = ({
       console.error('No file content found');
       return;
     }
-  
+
     const content = selectedFile.content;
-  
+
     const firstCurly = content.indexOf('{');
     const firstSquare = content.indexOf('[');
-  
+
     if (firstCurly === -1 && firstSquare === -1) {
       console.error('No JSON brackets found');
       return;
     }
-  
+
     let startIndex;
     let closingChar;
-  
+
     if (firstCurly !== -1 && (firstSquare === -1 || firstCurly < firstSquare)) {
       startIndex = firstCurly;
       closingChar = '}';
@@ -242,16 +242,16 @@ const ControlMenu = ({
         closingChar = ']';
       }
     }
-  
+
     const endIndex = content.lastIndexOf(closingChar);
-  
+
     if (endIndex === -1 || startIndex >= endIndex) {
       console.error(`Could not find matching closing bracket: ${closingChar}`);
       return;
     }
-  
+
     const cleanedJson = content.slice(startIndex, endIndex + 1);
-  
+
     try {
       console.log('Parsed JSON:', cleanedJson);
       const parsed = JSON.parse(cleanedJson);

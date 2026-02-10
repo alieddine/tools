@@ -14,7 +14,7 @@ const AppRoutes = () => {
         <Routes>
             <Route path="/" element={<MainRoute />} >
                 <Route path="/home" element={<Home />} />
-                <Route path="/formate">
+                <Route path="/format">
                     <Route path="json" element={<Json />} />
                     <Route path="xml" element={<Xml />} />
                 </Route>

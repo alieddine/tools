@@ -1,6 +1,6 @@
 import TextEditor from '@/components/custom/textEditor';
 import { useEffect, useState } from 'react';
-import { format } from '../../../helpers/formater.ts';
+import { format } from '../../../helpers/formatter.ts';
 import {
   Tooltip,
   TooltipContent,
@@ -25,7 +25,7 @@ import { deleteFile, getFile, listFilesByType, saveNewFile, updateFile } from '.
 import { Button } from '@/components/ui/button.tsx';
 import type { FileEntry } from '@/helpers/db.ts';
 import type { Ace } from 'ace-builds';
-import type { Marker } from '../../../helpers/formater';
+import type { Marker } from '../../../helpers/formatter';
 import { CarbonExecutableProgram, MaterialSymbolsAddNotes, MdiXml, MdiContentCopy, MdiContentSave, MdiDeleteForever, MdiMathLog } from '@/components/custom/svgs.tsx';
 
 import { parse, j2xParser } from 'fast-xml-parser';
@@ -46,10 +46,10 @@ function XmlPanel() {
     createdAt: new Date().toISOString(),
   });
   const { editorTheme } = useEditorThemeContext();
-  
+
   const [annotations, setAnnotations] = useState<Ace.Annotation[]>([]);
   const [markers, setMarkers] = useState<Marker[]>([]);
-  
+
   return (
     <div className="flex flex-col h-[800px] text-text  scale-x-100 min-w-[400px] items-start justify-start">
       <ControlMenu selectedFile={selectedFile} setSelectedFile={setSelectedFile} setAnnotations={setAnnotations} setMarkers={setMarkers} />
@@ -92,13 +92,13 @@ const ControlMenu = ({
       console.error('No file selected for formatting');
       return;
     }
-  
+
     let cleanXML = selectedFile.content.trim();
-  
+
     const startIndex = cleanXML.indexOf('<');
     const endIndex = cleanXML.lastIndexOf('>');
     cleanXML = cleanXML.substring(startIndex, endIndex + 1);
-  
+
     const formattedXML = format({ code: cleanXML, type: 'xml' });
     if (formattedXML.success && formattedXML.formatted) {
       setSelectedFile({ ...selectedFile, content: formattedXML.formatted });
@@ -109,7 +109,7 @@ const ControlMenu = ({
       setMarkers(formattedXML.markers || []);
     }
   };
-  
+
 
   const formatXML = () => {
     if (!selectedFile) {
@@ -260,11 +260,11 @@ const ControlMenu = ({
         <MdiDeleteForever className="size-7 cursor-pointer fill-danger hover:scale-110 ease-in-out duration-200" onClick={deleteText} />
       </TooltipCustom>
 
-      <TooltipCustom content="Remove logs and Formate XML">
+      <TooltipCustom content="Remove logs and format XML">
         <MdiMathLog className='size-7 cursor-pointer fill-success hover:scale-110 ease-in-out duration-200 ' onClick={logsFormatXML} />
       </TooltipCustom>
 
-      <TooltipCustom content="Formate XML">
+      <TooltipCustom content="format XML">
         <CarbonExecutableProgram className='size-7 cursor-pointer fill-success hover:scale-110 ease-in-out duration-200 ' onClick={formatXML} />
       </TooltipCustom>
       <TooltipCustom content="Copy XML to clipboard">

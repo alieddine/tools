@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import AceEditor from 'react-ace';
-import type { Marker } from '../../helpers/formater';
+import type { Marker } from '../../helpers/formatter';
 import { Ace } from 'ace-builds';
 
 import 'ace-builds/src-noconflict/mode-json';
@@ -57,7 +57,7 @@ import "ace-builds/src-noconflict/ext-searchbox";
 import './textEditor.css';
 import { X } from 'lucide-react';
 import type { ThemeType } from '@/lib/themes';
- 
+
 
 type Props = {
   value: string;
@@ -98,7 +98,7 @@ const TextEditor: React.FC<Props> = ({ value, theme = "vibrant_ink", language, o
       text: text,
     });
   }, [annotations, editorRef]);
-  
+
 
   useEffect(() => {
     const editor = editorRef.current?.editor;
@@ -125,7 +125,7 @@ const TextEditor: React.FC<Props> = ({ value, theme = "vibrant_ink", language, o
     };
     const { row , column} = annotations[0];
     editor.scrollToLine(row + 1, true, true, () => {
-      
+
       updateTooltipPosition();
     });
     editor.renderer.scrollToY(row * editor.renderer.lineHeight);
@@ -148,13 +148,13 @@ const TextEditor: React.FC<Props> = ({ value, theme = "vibrant_ink", language, o
 
     editor.session.on('changeScrollTop', onScroll);
     editor.session.on('changeScrollLeft', onScroll);
-  
+
     return () => {
       editor.session.off('changeScrollTop', onScroll);
       editor.session.off('changeScrollLeft', onScroll);
     };
   }, [annotations, updateTooltipPosition]);
-  
+
   return (
     <div className="w-full h-[93%] mb-3 overflow-hidden">
       <AceEditor
@@ -193,4 +193,3 @@ const TextEditor: React.FC<Props> = ({ value, theme = "vibrant_ink", language, o
 };
 
 export default TextEditor;
-

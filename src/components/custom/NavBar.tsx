@@ -15,37 +15,37 @@ import "../../index.css";
 const components: { title: string; href: string; description: string }[] = [
   {
     title: "JSON",
-    href: "/formate/json",
+    href: "/format/json",
     description:
       "Formats JSON data to be more readable with proper indentation, syntax highlighting, and error detection. Supports minifying or prettifying and validating against JSON standards.",
   },
   {
     title: "XML",
-    href: "/formate/xml",
+    href: "/format/xml",
     description:
       "Formats and beautifies XML with indentation and tag alignment. Helps detect unclosed tags and supports collapsing/expanding node trees for easier navigation.",
   },
   {
     title: "YAML",
-    href: "/formate/yaml",
+    href: "/format/yaml",
     description:
       "Cleans and organizes YAML data with consistent spacing and indentation. Includes validation to detect structural or formatting issues.",
   },
   {
     title: "CSV",
-    href: "/formate/csv",
+    href: "/format/csv",
     description:
       "Formats CSV data into aligned columns for easier reading. Converts data to and from other formats like JSON or Excel-compatible tables.",
   },
   {
     title: "HTML",
-    href: "/formate/html",
+    href: "/format/html",
     description:
       "Beautifies and structures HTML with proper indentation. Helps remove unnecessary whitespace and detects unclosed tags or invalid nesting.",
   },
   {
     title: "SQL",
-    href: "/formate/sql",
+    href: "/format/sql",
     description:
       "Formats SQL queries with proper indentation and keyword highlighting for improved readability. Supports formatting for different SQL dialects (MySQL, PostgreSQL, etc.).",
   },
@@ -95,7 +95,7 @@ function NavBar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Formate file</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Format file</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid text-text w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                 {components.map((component) => (
@@ -156,7 +156,7 @@ function NavBar() {
                       </p>
                     </Link>
                   </NavigationMenuLink>
-               
+
                 </li>
               </ul>
             </NavigationMenuContent>

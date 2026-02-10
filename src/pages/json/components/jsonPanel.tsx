@@ -30,6 +30,7 @@ import type { Marker } from '../../../helpers/formater';
 import { CarbonExecutableProgram, MaterialSymbolsAddNotes, MdiCodeJson, MdiContentCopy, MdiContentSave, MdiDeleteForever, MdiMathLog } from '@/components/custom/svgs.tsx';
 import { useEditorThemeContext } from '@/context/EditorThemeContext.tsx';
 
+
 type FileListItem = {
   id: number;
   name: string;
@@ -208,45 +209,57 @@ const ControlMenu = ({
   }, [updateFileList]);
 
   const logsFormatJson = () => {
-    if (!selectedFile) {
-      console.error('No file selected for formatting');
+    if (!selectedFile?.content) {
+      console.error('No file content found');
       return;
     }
-
+  
     const content = selectedFile.content;
+  
     const firstCurly = content.indexOf('{');
     const firstSquare = content.indexOf('[');
-    const firstIndex =
-      firstCurly === -1
-        ? firstSquare
-        : firstSquare === -1
-        ? firstCurly
-        : Math.min(firstCurly, firstSquare);
-
-    const lastCurly = content.lastIndexOf('}');
-    const lastSquare = content.lastIndexOf(']');
-    const lastIndex =
-      lastCurly === -1
-        ? lastSquare
-        : lastSquare === -1
-        ? lastCurly
-        : Math.max(lastCurly, lastSquare);
-
-    if (firstIndex === -1 || lastIndex === -1 || firstIndex >= lastIndex) {
-      console.error('Invalid JSON structure');
+  
+    if (firstCurly === -1 && firstSquare === -1) {
+      console.error('No JSON brackets found');
       return;
     }
-
-    const trimmedContent = content.slice(firstIndex, lastIndex + 1);
-
+  
+    let startIndex;
+    let closingChar;
+  
+    if (firstCurly !== -1 && (firstSquare === -1 || firstCurly < firstSquare)) {
+      startIndex = firstCurly;
+      closingChar = '}';
+    } else {
+      console.log("a" , firstSquare);
+      const nextcar = content.charAt(firstSquare + 1);
+      console.log("a" , nextcar);
+      if (nextcar !== '{' && nextcar !== '[') {
+        startIndex = firstCurly;
+        closingChar = '}';
+      } else {
+        startIndex = firstSquare;
+        closingChar = ']';
+      }
+    }
+  
+    const endIndex = content.lastIndexOf(closingChar);
+  
+    if (endIndex === -1 || startIndex >= endIndex) {
+      console.error(`Could not find matching closing bracket: ${closingChar}`);
+      return;
+    }
+  
+    const cleanedJson = content.slice(startIndex, endIndex + 1);
+  
     try {
-      const parsedJson = JSON.parse(trimmedContent);
-      const formattedJson = JSON.stringify(parsedJson, null, 2);
-      setSelectedFile({ ...selectedFile, content: formattedJson });
+      console.log('Parsed JSON:', cleanedJson);
+      const parsed = JSON.parse(cleanedJson);
+      setSelectedFile({ ...selectedFile, content: JSON.stringify(parsed, null, 2) });
       setAnnotations([]);
       setMarkers([]);
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
+    } catch (e) {
+      console.error('Parsing failed. The content between brackets is not valid JSON.', e);
     }
   };
 
